@@ -3404,6 +3404,7 @@ async function initializeScene() {
     infoBox: false,
     selectionIndicator: false,
     terrainProvider: new Cesium.EllipsoidTerrainProvider(),
+    imageryProvider: false,
     requestRenderMode: false,
     shadows: false,
   });
@@ -3694,15 +3695,10 @@ async function initializeScene() {
     },
   });
   setCamera("chase");
-  const timeout = (p, ms, fallback) =>
-    Promise.race([
-      p,
-      new Promise((resolve) => setTimeout(() => resolve(fallback), ms)),
-    ]);
   await Promise.all([
-    timeout(rocketModelPromise, 30000, null),
-    timeout(stationModelPromise, 30000, null),
-    timeout(preloadSkyboxImages(), 30000, null),
+    rocketModelPromise,
+    stationModelPromise,
+    preloadSkyboxImages(),
   ]);
   await initializeHighlightModel();
   initialized.value = true;
