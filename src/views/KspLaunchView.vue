@@ -864,6 +864,7 @@
 </template>
 
 <script setup>
+const B = import.meta.env.BASE_URL;
 import {
   computed,
   nextTick,
@@ -1098,7 +1099,6 @@ const launchCountdown = ref(null);
 const systemMessage = reactive({ text: "", type: "info" });
 let systemMessageTimer;
 const RESOURCE_COUNT = 26;
-const B = import.meta.env.BASE_URL;
 const SKYBOX_SOURCES = {
   positiveX: B + "images/3/tycho2t3_80_px.jpg",
   negativeX: B + "images/3/tycho2t3_80_mx.jpg",
