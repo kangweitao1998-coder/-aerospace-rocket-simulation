@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uvx --from blender-mcp pip show blender-mcp)"
+    ]
+  }
+}

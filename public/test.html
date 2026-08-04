@@ -1,0 +1,179 @@
+<template>
+  <div class="satllite-track">
+    <div>
+      <button @click="changeViewModel">切换view-model</button>
+    </div>
+    <div id="container" style="width: 100%; height: 100%"></div>
+  </div>
+</template>
+<script setup>
+import { onMounted, nextTick } from 'vue'
+import axios from 'axios'
+let viewer = null
+let scene = null
+let tleData = []
+let is3D = true
+let mySceneModel = null
+onMounted(() => {
+  nextTick(() => {
+    initEarth()
+  })
+})
+/**
+ * 初始化地球
+ */
+const initEarth = () => {
+  Cesium.Ion.defaultAccessToken = ''
+  if (!viewer) {
+    viewer = new Cesium.Viewer('container', {
+    //   sceneModePicker: false,
+      camera: (Cesium.Camera.DEFAULT_VIEW_RECTANGLE = Cesium.Rectangle.fromDegrees(
+        100.0,
+        0.0,
+        150.0,
+        60.0
+      ))
+    })
+    viewer.scene.globe.depthTestAgainstTerrain = true
+    scene = viewer.scene
+    mySceneModel = new Cesium.SceneModePickerViewModel(scene, 0)
+    mySceneModel.morphTo2D.afterExecute.addEventListener(() => {
+      viewer.camera.setView({
+        destination: Cesium.Cartesian3.fromDegrees(115.16, 40.71, 18000000.0)
+      })
+      console.log(viewer.camera)
+    })
+    mySceneModel.morphTo3D.afterExecute.addEventListener(() => {
+      viewer.camera.flyHome()
+    })
+  }
+  getTLE()
+}
+const getTLE = () => {
+    //获取tle数据
+  axios.get('/json/tleTest.json').then((res) => {
+    tleData = res.data.data
+    // console.log(tleData, 'ttt')
+    viewer.clock.shouldAnimate = true
+    satlliteTest()
+  })
+}
+const changeViewModel = () => {
+  if (is3D) {
+    // viewer.scene.morphTo2D()
+    mySceneModel.morphTo2D()
+  } else {
+    // viewer.scene.morphTo3D()
+    mySceneModel.morphTo3D()
+  }
+  is3D = !is3D
+  //   console.log(viewer, 'viewer')
+  console.log(mySceneModel.morphTo2D, 'mySceneModel')
+}
+/**
+ * 测试轨道
+ * 改函数可直接运行
+ */
+function satlliteTest() {
+  // Sample TLE-tle数据示例，来源于satellite.js 官网
+  var tleLine1 = '1 25544U 98067A   19156.50900463  .00003075  00000-0  59442-4 0  9992',
+    tleLine2 = '2 25544  51.6433  59.2583 0008217  16.4489 347.6017 15.51174618173442'
+ 
+  var satrec = satellite.twoline2satrec(tleLine1, tleLine2)
+  console.log(satrec, 'satrec')
+  let totalIntervalsInDay = satrec.no * 1440 * 0.159155 //1440 = min && 0.159155 = 1turn
+  // 获得运行一圈的分钟数
+  let minsPerInterval = 1440 / totalIntervalsInDay // mins for 1 revolution around earth
+  console.log(minsPerInterval, 'minsPer')
+  // 获取startTime && endTime
+  const { startTime, endTime } = getStratEndTime(minsPerInterval)
+  viewer.clock.startTime = startTime.clone()
+  viewer.clock.endTime = endTime.clone()
+  viewer.clock.currentTime = startTime.clone()
+  // 获取positionProperty
+  const positionProperty = getPositionSample(satrec, minsPerInterval)
+  const entity = viewer.entities.add({
+    name: '卫星',
+    availability: new Cesium.TimeIntervalCollection([
+      new Cesium.TimeInterval({
+        start: startTime,
+        stop: endTime
+      })
+    ]),
+    position: positionProperty,
+    orientation: new Cesium.VelocityOrientationProperty(positionProperty),
+    // 卫星模型
+    model: {
+      uri: '/resource/models/Satellite/qx_zk.glb', // 模型uri
+      minimumPixelSize: 128
+      //   maximumScale: 20000,
+    },
+    path: {
+      resolution: 1,
+      material: new Cesium.PolylineGlowMaterialProperty({
+        glowPower: 0.5,
+        color: Cesium.Color.RED
+      }),
+      width: 5
+      // leadTime: 720,
+      // trailTime: 720
+    }
+  })
+  // 插值
+  entity.position.setInterpolationOptions({
+    interpolationDegree: 5,
+    interpolationAlgorithm: Cesium.LagrangePolynomialApproximation
+  })
+}
+/**
+ * 计算 startTime && endTime
+ * minsPerInterval: 一圈分钟数
+ */
+function getStratEndTime(minsPerInterval) {
+  const startTimeStamp = Date.now()
+  // 结束时间为一圈后的时间
+  const endTimeStamp = startTimeStamp + minsPerInterval * 60 * 1000
+  let startTime = new Cesium.JulianDate.fromDate(new Date(startTimeStamp))
+  startTime = Cesium.JulianDate.addHours(startTime, 8, new Cesium.JulianDate())
+  let endTime = new Cesium.JulianDate.fromDate(new Date(endTimeStamp))
+  endTime = Cesium.JulianDate.addHours(endTime, 8, new Cesium.JulianDate())
+  return {
+    startTime,
+    endTime
+  }
+}
+/**
+ * 计算SampledPositionProperty
+ * satrec: satellite.twoline2satrec返回值
+ * minsPerInterval：一圈分钟数
+ */
+function getPositionSample(satrec, minsPerInterval) {
+  const positionProperty = new Cesium.SampledPositionProperty()
+  const now = Date.now()
+  for (let i = 0; i <= minsPerInterval; i++) {
+    // 从现在起，获取一圈内每分钟的位置;生成一个数组，用作插值
+    const curTimeDate = new Date(now + i * 60 * 1000)
+    var positionAndVelocity = satellite.propagate(satrec, curTimeDate) // 此方法拿到的是惯性系坐标
+    var gmst = satellite.gstime(new Date(curTimeDate))
+    // 惯性
+    const positionEci = positionAndVelocity.position
+    // 惯性转成地固
+    const positionEcf = satellite.eciToEcf(positionEci, gmst)
+    // julian日期
+    const curJulianDate = new Cesium.JulianDate.fromDate(curTimeDate)
+    // 北京时
+    const d = new Cesium.JulianDate.addHours(curJulianDate, 8, new Cesium.JulianDate())
+    positionProperty.addSample(
+      d,
+      // 这里使用惯性或者地固都行，但是地固系在端点处偏差较大，因此使用惯性系
+      new Cesium.Cartesian3(positionEci.x * 1000, positionEci.y * 1000, positionEci.z * 1000)
+    )
+  }
+  return positionProperty
+}
+</script>
+<style scoped>
+.satllite-track {
+  height: 100%;
+}
+</style>
