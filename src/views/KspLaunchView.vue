@@ -1888,11 +1888,16 @@ function applySceneSettings() {
   scene.globe.enableLighting = true;
   scene.globe.dynamicAtmosphereLighting = true;
   scene.globe.dynamicAtmosphereLightingFromSun = true;
-  scene.globe.lightingFadeOutDistance = 1.0e9;
-  scene.globe.lightingFadeInDistance = 1.1e9;
-  scene.globe.nightFadeOutDistance = 1.0e9;
-  scene.globe.nightFadeInDistance = 1.1e9;
+  scene.globe.lightingFadeOutDistance = 2.0e7;
+  scene.globe.lightingFadeInDistance = 3.0e7;
+  scene.globe.nightFadeOutDistance = 5.0e7;
+  scene.globe.nightFadeInDistance = 6.0e7;
   scene.globe.atmosphereLightIntensity = sceneSettings.atmosphereIntensity;
+  scene.globe.maximumScreenSpaceError =
+    sceneSettings.resolutionScale > 1 ? 1.8 : 2.5;
+  scene.globe.tileCacheSize = 1000;
+  scene.globe.preloadAncestors = true;
+  scene.globe.preloadSiblings = true;
   scene.highDynamicRange = sceneSettings.hdr;
   scene.sun.show = sceneSettings.sun;
   scene.moon.show = false;
@@ -1901,7 +1906,7 @@ function applySceneSettings() {
   for (let index = 0; index < viewer.imageryLayers.length; index += 1) {
     const layer = viewer.imageryLayers.get(index);
     layer.dayAlpha = 1;
-    layer.nightAlpha = 0.06;
+    layer.nightAlpha = 0.3;
   }
   scene.globe.maximumScreenSpaceError =
     sceneSettings.resolutionScale > 1 ? 1.8 : 2.5;
@@ -3425,12 +3430,16 @@ async function initializeScene() {
   );
   viewer._cesiumWidget._creditContainer.style.display = "none";
 
-  viewer.scene.globe.baseColor = Cesium.Color.fromCssColorString("#07120c");
+  viewer.scene.globe.baseColor = Cesium.Color.fromCssColorString("#2a2a2a");
   viewer.scene.globe.enableLighting = true;
   viewer.scene.globe.showGroundAtmosphere = true;
   viewer.scene.globe.depthTestAgainstTerrain = true;
   viewer.scene.globe.atmosphereLightIntensity = 20.0;
   viewer.scene.globe.atmosphereMieAnisotropy = 0.91;
+  viewer.scene.globe.maximumScreenSpaceError = 2;
+  viewer.scene.globe.tileCacheSize = 1000;
+  viewer.scene.globe.preloadAncestors = true;
+  viewer.scene.globe.preloadSiblings = true;
   viewer.scene.skyAtmosphere.show = true;
   viewer.scene.skyAtmosphere.perFragmentAtmosphere = true;
   viewer.scene.skyAtmosphere.brightnessShift = 0.03;
