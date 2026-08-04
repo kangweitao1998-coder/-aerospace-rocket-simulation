@@ -2,15 +2,15 @@
   <div class="app">
     <div id="cesiumContainer"></div>
 
-    <!-- 加载中 -->
+    <!-- 加载�?-->
     <div v-if="!initialized" class="loading">
       <div class="loading-spinner"></div>
       <div class="loading-text">正在加载场景资源...</div>
     </div>
 
-    <!-- UI 覆盖层 -->
+    <!-- UI 覆盖�?-->
     <div v-if="initialized" class="overlay">
-      <!-- 顶部标题栏 -->
+      <!-- 顶部标题�?-->
       <div class="top-bar">
         <div class="top-bar-left">
           <span
@@ -18,7 +18,7 @@
             :class="{ active: simState.isRunning }"
           ></span>
           <span class="status-text">{{
-            simState.isRunning ? "任务进行中" : "待命"
+            simState.isRunning ? "任务进行�? : "待命"
           }}</span>
         </div>
         <div class="top-bar-center">
@@ -40,12 +40,12 @@
         <div class="config-panel">
           <div class="config-header">
             <span class="config-title">🛰 轨道配置</span>
-            <button class="config-close" @click="showConfig = false">✕</button>
+            <button class="config-close" @click="showConfig = false">�?/button>
           </div>
           <div class="config-body">
             <!-- 发射场选择 -->
             <div class="config-section">
-              <div class="config-label">发射场</div>
+              <div class="config-label">发射�?/div>
               <select v-model="orbitConfig.launchSite" class="config-select">
                 <option v-for="s in launchSites" :key="s.name" :value="s.name">{{ s.name }}</option>
               </select>
@@ -87,17 +87,17 @@
             >
           </div>
           <div class="data-row">
-            <span class="data-label">俯仰角</span>
+            <span class="data-label">俯仰�?/span>
             <span class="data-value">{{ simState.pitch.toFixed(1) }}°</span>
           </div>
           <div class="data-row" v-if="simState.periapsis > 0">
-            <span class="data-label">近地点</span>
+            <span class="data-label">近地�?/span>
             <span class="data-value"
               >{{ simState.periapsis }} <span class="unit">km</span></span
             >
           </div>
           <div class="data-row" v-if="simState.apoapsis > 0">
-            <span class="data-label">远地点</span>
+            <span class="data-label">远地�?/span>
             <span class="data-value"
               >{{ simState.apoapsis }} <span class="unit">km</span></span
             >
@@ -105,26 +105,26 @@
         </div>
       </div>
 
-      <!-- 左侧火箭状态面板 -->
+      <!-- 左侧火箭状态面�?-->
       <div class="panel panel-left-bottom">
         <div class="panel-header">
           <span class="panel-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5 L6.5 6 L6.5 10 L8 14.5 L9.5 10 L9.5 6 Z" stroke="currentColor" stroke-width="1.2"/><rect x="7" y="10" width="2" height="2.5" rx="0.5" fill="currentColor" opacity="0.5"/></svg></span>
-          <span class="panel-title">火箭状态</span>
+          <span class="panel-title">火箭状�?/span>
         </div>
         <div class="panel-body">
           <div class="stage-item" :class="stageClass('booster')">
             <span class="stage-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5 L6.5 6 L6.5 10 L8 14.5 L9.5 10 L9.5 6 Z" stroke="currentColor" stroke-width="1.2"/><rect x="7" y="10" width="2" height="2.5" rx="0.5" fill="currentColor" opacity="0.5"/></svg></span>
-            <span class="stage-name">助推器</span>
+            <span class="stage-name">助推�?/span>
             <span class="stage-status">{{ stageStatus("booster") }}</span>
           </div>
           <div class="stage-item" :class="stageClass('stage1')">
             <span class="stage-icon stage-icon-num">1</span>
-            <span class="stage-name">一级火箭</span>
+            <span class="stage-name">一级火�?/span>
             <span class="stage-status">{{ stageStatus("stage1") }}</span>
           </div>
           <div class="stage-item" :class="stageClass('fairing')">
             <span class="stage-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5 L2.5 4 L2.5 9 C2.5 12 5 14 8 15 C11 14 13 12 13 9 L13 4 Z" stroke="currentColor" stroke-width="1.2"/></svg></span>
-            <span class="stage-name">整流罩</span>
+            <span class="stage-name">整流�?/span>
             <span class="stage-status">{{ stageStatus("fairing") }}</span>
           </div>
           <div class="stage-item" :class="stageClass('stage2')">
@@ -199,11 +199,11 @@
         </div>
         <div class="panel-body">
           <div class="data-row" v-if="simState.periapsis > 0">
-            <span class="data-label">近地点</span>
+            <span class="data-label">近地�?/span>
             <span class="data-value">{{ simState.periapsis }} <span class="unit">km</span></span>
           </div>
           <div class="data-row" v-if="simState.apoapsis > 0">
-            <span class="data-label">远地点</span>
+            <span class="data-label">远地�?/span>
             <span class="data-value">{{ simState.apoapsis }} <span class="unit">km</span></span>
           </div>
           <div class="data-row" v-if="simState.periapsis > 0">
@@ -211,12 +211,12 @@
             <span class="data-value phase-tag">{{ orbitType }}</span>
           </div>
           <div class="data-row" v-if="simState.satDeployed">
-            <span class="data-label">状态</span>
+            <span class="data-label">状�?/span>
             <span class="data-value" style="color:#00ff88">在轨运行</span>
           </div>
           <div class="data-row" v-if="simState.periapsis <= 0">
             <span class="data-label">提示</span>
-            <span class="data-value" style="color:#4a6a8a;font-size:11px">入轨后显示</span>
+            <span class="data-value" style="color:#4a6a8a;font-size:11px">入轨后显�?/span>
           </div>
         </div>
       </div>
@@ -288,7 +288,7 @@
           >
             <svg width="14" height="14" viewBox="0 0 16 16" class="btn-ctrl-icon"><polygon points="3,2 13,8 3,14" fill="currentColor"/></svg>
           </button>
-          <span class="speed-label">倍速</span>
+          <span class="speed-label">倍�?/span>
           <button
             v-for="s in [1, 2, 5, 10]"
             :key="s"
@@ -333,7 +333,7 @@ import { generateOrbitPath, generateLaunchTrajectory, buildSatrec, getSiteCoords
 
 const Cesium = window.Cesium;
 
-// --- 响应式状态 ---
+// --- 响应式状�?---
 const initialized = ref(false);
 const simState = reactive({
   isRunning: false,
@@ -361,7 +361,7 @@ const simState = reactive({
   apoapsis: 0,
 });
 
-// ── FPS 计数器 ──
+// ── FPS 计数�?──
 const fpsCounter = ref(0);
 let _fpsFrames = 0;
 let _fpsLastTime = performance.now();
@@ -436,11 +436,9 @@ function reloadTrajectory() {
     viewer.clock.currentTime = clockStart.clone();
   }
 
-  // 重建火箭位置属性
-  rebuildRocketPositions();
+  // 重建火箭位置属�?  rebuildRocketPositions();
 
-  // 重建轨道线
-  if (rocketGroups.orbitEntities) {
+  // 重建轨道�?  if (rocketGroups.orbitEntities) {
     rocketGroups.orbitEntities.forEach((e) => viewer.entities.remove(e));
   }
   const orbitPtsRaw = generateOrbitPath(orbitConfig);
@@ -452,8 +450,7 @@ function reloadTrajectory() {
     rocketGroups.orbitEntities = [newOrbitEntity];
   }
 
-  // 更新粒子发射位置到新发射场
-  const siteMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
+  // 更新粒子发射位置到新发射�?  const siteMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
     Cesium.Cartesian3.fromDegrees(site.lon, site.lat, 35)
   );
   [flameParticles1, flameParticles2, flameParticles3, smokeParticles].forEach((p) => {
@@ -461,8 +458,7 @@ function reloadTrajectory() {
   });
   boosterFlameParticles.forEach((p) => { if (p) p.modelMatrix = siteMatrix; });
 
-  // 更新相机到新发射场
-  viewer.camera.setView({
+  // 更新相机到新发射�?  viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(site.lon, site.lat - 0.001, 40),
     orientation: { heading: 0, pitch: Cesium.Math.toRadians(-10), roll: 0 },
   });
@@ -475,7 +471,7 @@ function rebuildRocketPositions() {
     interpolationAlgorithm: Cesium.LinearApproximation,
   };
 
-  // 统一位置属性：trajectory 已包含全段（上升段 + SGP4 轨道段）
+  // 统一位置属性：trajectory 已包含全段（上升�?+ SGP4 轨道段）
   const mainPos = new Cesium.SampledPositionProperty();
   trajectory.forEach((pt) => {
     if (isFinite(pt.lon) && isFinite(pt.lat) && isFinite(pt.alt)) {
@@ -615,9 +611,7 @@ const SEPARATION_ANIM_MAP = {
 };
 
 const _triggeredAnims = new Set();
-const _pendingAnims = []; // 模型未就绪时排队等待的动画
-const SEPARATION_ANIM_DURATION = 9; // 动画约270帧 ≈ 9秒
-
+const _pendingAnims = []; // 模型未就绪时排队等待的动�?const SEPARATION_ANIM_DURATION = 9; // 动画�?70�?�?9�?
 function fillPositionSamples(posProp, points, startT = 0, endT = 99999) {
   points.forEach((pt) => {
     if (pt.time >= startT && pt.time <= endT) {
@@ -655,8 +649,8 @@ async function createRocketAssembly() {
   const site = getSiteCoords(orbitConfig.launchSite);
   const fallbackPos = Cesium.Cartesian3.fromDegrees(site.lon, site.lat, 40);
 
-  // ── 统一位置属性：trajectory 已包含全段（上升段 + SGP4 轨道段）──
-  // 不需要两套 Property 混合，直接用一个 SampledPositionProperty
+  // ── 统一位置属性：trajectory 已包含全段（上升�?+ SGP4 轨道段）──
+  // 不需要两�?Property 混合，直接用一�?SampledPositionProperty
   const mainPos = new Cesium.SampledPositionProperty();
   trajectory.forEach((pt) => {
     if (isFinite(pt.lon) && isFinite(pt.lat) && isFinite(pt.alt)) {
@@ -666,8 +660,7 @@ async function createRocketAssembly() {
   });
   mainPos.setInterpolationOptions(interpOpts);
 
-  // satOrbitPos 备用（入轨后 ECF 精确位置）
-  const satOrbitPos = new Cesium.SampledPositionProperty();
+  // satOrbitPos 备用（入轨后 ECF 精确位置�?  const satOrbitPos = new Cesium.SampledPositionProperty();
   const satrec = buildSatrec(orbitConfig);
   if (satrec && !satrec.error) {
     const tIns = et.stage3Sep || 280;
@@ -690,14 +683,14 @@ async function createRocketAssembly() {
     return mainPos.getValue(time) || fallbackPos;
   }, false);
 
-  // ── 朝向属性 ──
+  // ── 朝向属�?──
   const rocketOrientation = createRocketOrientationProperty(
     new Cesium.CallbackProperty((time) => {
       return mainPos.getValue(time);
     }, false),
   );
 
-  // ── 单个 entity：point（不含 model，model 用 primitive）──
+  // ── 单个 entity：point（不�?model，model �?primitive）──
   rocketGroups.rocketEntity = viewer.entities.add({
     position: rocketPosition,
     orientation: rocketOrientation,
@@ -712,10 +705,10 @@ async function createRocketAssembly() {
     },
   });
 
-  // ── Model 用 primitive 加载 ──
+  // ── Model �?primitive 加载 ──
   const modelReady = new Promise((resolve) => {
     Cesium.Model.fromGltfAsync({
-      url: "/models/rocket_model.glb",
+      url: "./models/rocket_model.glb",
       modelMatrix: Cesium.Matrix4.IDENTITY.clone(),
       scale: 1.0,
       show: true,
@@ -766,8 +759,7 @@ async function createRocketAssembly() {
           _modelReady = true;
           console.log("[Rocket] Animations mapped:", Object.keys(_animIndexMap).length);
 
-          // 回放排队等待的动画
-          while (_pendingAnims.length > 0) {
+          // 回放排队等待的动�?          while (_pendingAnims.length > 0) {
             const pending = _pendingAnims.shift();
             console.log("[Rocket] Playing queued anim:", pending.animNames.join(","));
             playAnimAtTime(pending.animNames, pending.startTime);
@@ -776,12 +768,12 @@ async function createRocketAssembly() {
           resolve();
         };
 
-        // fromGltfAsync 的 Promise resolve 时模型应该已就绪
-        // 但保险起见，检查 model.ready 并处理 readyEvent
+        // fromGltfAsync �?Promise resolve 时模型应该已就绪
+        // 但保险起见，检�?model.ready 并处�?readyEvent
         if (model.ready) {
           setupAnims();
         } else {
-          // 模型尚未就绪，等待 readyEvent
+          // 模型尚未就绪，等�?readyEvent
           const handler = model.readyEvent.addEventListener(() => {
             model.readyEvent.removeEventListener(handler);
             setupAnims();
@@ -790,8 +782,7 @@ async function createRocketAssembly() {
       })
       .catch((err) => {
         console.error("[Rocket] Model load error:", err);
-        resolve(); // 即使失败也继续
-      });
+        resolve(); // 即使失败也继�?      });
   });
 
   rocketGroups._modelReady = modelReady;
@@ -972,7 +963,7 @@ async function initViewer() {
   viewer.scene.backgroundColor = Cesium.Color.BLACK;
   viewer.scene.skyBox.show = false;
 
-  // 从 TLE 提取轨道高度
+  // �?TLE 提取轨道高度
   let targetAlt = orbitConfig.altitude || 400;
   if (orbitConfig.tleLine1 && orbitConfig.tleLine2) {
     try {
@@ -1044,8 +1035,7 @@ async function initViewer() {
     rocketGroups.orbitEntities = [orbitEntity];
   }
 
-  // 等待模型加载完成后再展示界面，确保分离动画可用
-  if (rocketGroups._modelReady) await rocketGroups._modelReady;
+  // 等待模型加载完成后再展示界面，确保分离动画可�?  if (rocketGroups._modelReady) await rocketGroups._modelReady;
   initialized.value = true;
 }
 
@@ -1089,7 +1079,7 @@ function _applyNodeVisibility(model, prefixes, visible) {
   traverse(allNodes);
 }
 
-// ── 分离事件：播放 GLB 动画 + 延迟隐藏 ──
+// ── 分离事件：播�?GLB 动画 + 延迟隐藏 ──
 function playAnimAtTime(animNames, startTime) {
   if (!rocketModelObj || !rocketModelObj.activeAnimations || !_animIndexMap) {
     console.warn("[Rocket] Cannot play anim, model/animMap not ready");
@@ -1190,7 +1180,7 @@ function onClockTick(clock) {
       "booster_l",
     ]);
     simState.boosterSeparated = true;
-    // pushMessage("rocket", "助推器分离完成", "separation");
+    // pushMessage("rocket", "助推器分离完�?, "separation");
   } else if (t < et.boosterSep && simState.boosterSeparated) {
     showComponent("booster_f");
     showComponent("booster_r");
@@ -1203,7 +1193,7 @@ function onClockTick(clock) {
     triggerSeparation("stage1Sep", ["stage1"]);
     simState.stage1Separated = true;
     simState.stage1Active = false;
-    // pushMessage("rocket", "一级火箭分离完成", "separation");
+    // pushMessage("rocket", "一级火箭分离完�?, "separation");
   } else if (t < stage1SepDelayed && simState.stage1Separated) {
     showComponent("stage1");
     simState.stage1Separated = false;
@@ -1213,7 +1203,7 @@ function onClockTick(clock) {
   if (t >= fairingSepDelayed && !simState.fairingJettisoned) {
     triggerSeparation("fairingSep", ["fairing_l", "fairing_r"]);
     simState.fairingJettisoned = true;
-    // pushMessage("shield", "整流罩抛离完成", "fairing");
+    // pushMessage("shield", "整流罩抛离完�?, "fairing");
   } else if (t < fairingSepDelayed && simState.fairingJettisoned) {
     showComponent("fairing_l");
     showComponent("fairing_r");
@@ -1241,7 +1231,7 @@ function onClockTick(clock) {
     simState.stage3Active = true;
   }
 
-  // ── 火箭工作状态 & 火焰 ──
+  // ── 火箭工作状�?& 火焰 ──
   const stage2SepDelayed = et.stage2Sep + 9;
   const boosterActive = !simState.boosterSeparated;
   const stage1Active = !simState.stage1Separated;
@@ -1369,8 +1359,7 @@ function onPreRender(scene, time) {
 }
 
 async function startLaunch() {
-  // 确保模型已就绪
-  if (rocketGroups._modelReady) {
+  // 确保模型已就�?  if (rocketGroups._modelReady) {
     await rocketGroups._modelReady;
   }
   simState.isRunning = true;
@@ -1381,8 +1370,7 @@ async function startLaunch() {
   viewer.clock.shouldAnimate = true;
   viewer.clock.multiplier = simState.multiplier;
   viewer.clock.currentTime = clockStart.clone();
-  // 点火后开始跟踪火箭
-  viewer.trackedEntity = rocketGroups.rocketEntity;
+  // 点火后开始跟踪火�?  viewer.trackedEntity = rocketGroups.rocketEntity;
   rocketGroups.trackPoint.viewFrom = new Cesium.Cartesian3(-300, 0, 0);
   const ent = viewer.trackedEntity;
   viewer.trackedEntity = undefined;
@@ -1505,7 +1493,7 @@ function skipTime(seconds) {
 const orbitType = computed(() => {
   const pe = simState.periapsis;
   if (pe <= 0) return "--";
-  if (pe < 100) return "亚轨道";
+  if (pe < 100) return "亚轨�?;
   if (pe < 2000) return "LEO 近地";
   if (pe < 35786) return "MEO 中地";
   return "GEO 同步";
@@ -1546,28 +1534,28 @@ function stageClass(stage) {
 }
 function stageStatus(stage) {
   if (stage === "booster")
-    return simState.boosterSeparated ? "已分离" : "工作中";
+    return simState.boosterSeparated ? "已分�? : "工作�?;
   if (stage === "stage1")
     return simState.stage1Separated
-      ? "已分离"
+      ? "已分�?
       : simState.stage1Active
-        ? "工作中"
+        ? "工作�?
         : "待命";
   if (stage === "fairing")
-    return simState.fairingJettisoned ? "已抛离" : "就位";
+    return simState.fairingJettisoned ? "已抛�? : "就位";
   if (stage === "stage2")
     return simState.stage2Separated
-      ? "已分离"
+      ? "已分�?
       : simState.stage2Active
-        ? "工作中"
+        ? "工作�?
         : "待命";
   if (stage === "stage3")
     return simState.stage3Separated
-      ? "已分离"
+      ? "已分�?
       : simState.stage3Active
-        ? "工作中"
+        ? "工作�?
         : "待命";
-  if (stage === "sat") return simState.satDeployed ? "已部署" : "待命";
+  if (stage === "sat") return simState.satDeployed ? "已部�? : "待命";
 }
 
 onMounted(() => {
@@ -1595,7 +1583,7 @@ onBeforeUnmount(() => {
   padding: 0;
 }
 
-/* 加载层 */
+/* 加载�?*/
 .loading {
   position: absolute;
   inset: 0;
@@ -1626,7 +1614,7 @@ onBeforeUnmount(() => {
   letter-spacing: 2px;
 }
 
-/* 覆盖层 */
+/* 覆盖�?*/
 .overlay {
   position: absolute;
   inset: 0;
@@ -1637,7 +1625,7 @@ onBeforeUnmount(() => {
   pointer-events: auto;
 }
 
-/* ── 顶部标题栏 ── */
+/* ── 顶部标题�?── */
 .top-bar {
   position: absolute;
   top: 0;
@@ -1807,7 +1795,7 @@ onBeforeUnmount(() => {
 .panel-right-mid .panel-body { overflow-y: visible; }
 .panel-right-mid    { top: 220px; right: 16px; }
 .panel-right-bottom { top: 386px; right: 16px; }
-/* ── 数据行 ── */
+/* ── 数据�?── */
 .data-row {
   display: flex;
   justify-content: space-between;
@@ -1944,7 +1932,7 @@ onBeforeUnmount(() => {
   flex-shrink: 0;
 }
 
-/* ── 底部控制栏 ── */
+/* ── 底部控制�?── */
 .bottom-bar {
   position: absolute;
   bottom: 50px;
@@ -2324,7 +2312,7 @@ onBeforeUnmount(() => {
 </style>
 
 <style>
-/* Cesium 时间轴 */
+/* Cesium 时间�?*/
 .cesium-viewer-timelineContainer {
   background: rgba(5, 10, 25, 0.9) !important;
   border-top: 1px solid rgba(0, 120, 255, 0.12) !important;
