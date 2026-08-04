@@ -3694,10 +3694,15 @@ async function initializeScene() {
     },
   });
   setCamera("chase");
+  const timeout = (p, ms, fallback) =>
+    Promise.race([
+      p,
+      new Promise((resolve) => setTimeout(() => resolve(fallback), ms)),
+    ]);
   await Promise.all([
-    rocketModelPromise,
-    stationModelPromise,
-    preloadSkyboxImages(),
+    timeout(rocketModelPromise, 30000, null),
+    timeout(stationModelPromise, 30000, null),
+    timeout(preloadSkyboxImages(), 30000, null),
   ]);
   await initializeHighlightModel();
   initialized.value = true;
@@ -5284,7 +5289,7 @@ button:hover {
   font:
     italic 900 42px/1.12 "Arial Black",
     "Impact",
-    "Noto Sans SC",
+    "Noto Sans SC", "Microsoft YaHei", sans-serif,
     sans-serif;
   letter-spacing: 2px;
   transform: skew(-6deg);
@@ -7370,7 +7375,7 @@ kbd {
   box-shadow: inset 0 1px #747a74, 0 2px 8px #0009;
   color: #e0a43a;
   cursor: pointer;
-  font: 13px "Orbitron", monospace;
+  font: 13px "Orbitron", "Consolas", monospace;
   transition: background 0.16s, border-color 0.16s;
 }
 .time-slider-toggle-btn:hover {
@@ -7403,13 +7408,13 @@ kbd {
 }
 .time-slider-value {
   color: #e0a43a;
-  font: bold 13px "Orbitron", monospace;
+  font: bold 13px "Orbitron", "Consolas", monospace;
   text-shadow: 0 0 6px #e0a43a33;
   white-space: nowrap;
 }
 .time-slider-label {
   color: #a8c9df;
-  font: 11px "Orbitron", "Noto Sans SC", sans-serif;
+  font: 11px "Orbitron", "Consolas", "Noto Sans SC", sans-serif;
   white-space: nowrap;
 }
 .time-slider-track {
