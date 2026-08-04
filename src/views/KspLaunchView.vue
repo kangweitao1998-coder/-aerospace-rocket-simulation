@@ -10,9 +10,10 @@
       <button
         @click="toggleMusic"
         :class="{ active: musicEnabled }"
-        :title="musicEnabled ? '关闭背景音乐' : '开启背景音�?"
+        :title="musicEnabled ? '关闭背景音乐' : '开启背景音乐'"
       >
-        �?      </button>
+        ♪
+      </button>
       <input
         v-model.number="musicVolume"
         @input="updateMusicVolume"
@@ -37,7 +38,7 @@
       @click="startMusicOnFirstInteraction"
     >
       <header class="home-topbar">
-        <div class="home-title"><b>SIM</b><span>航天任务模拟�?/span></div>
+        <div class="home-title"><b>SIM</b><span>航天任务模拟器</span></div>
         <div class="home-toolbar">
           <div class="home-status">
             <i></i><span>系统在线</span><em>版本 1.0</em>
@@ -50,7 +51,7 @@
             "
             title="系统设置"
           >
-            <span class="toolbar-icon">�?/span>设置
+            <span class="toolbar-icon">⚙</span>设置
           </button>
           <button
             @click="
@@ -58,7 +59,7 @@
               if (musicMenuVisible) settingsVisible = false;
             "
           >
-            <span class="toolbar-icon">�?/span>音乐
+            <span class="toolbar-icon">♫</span>音乐
           </button>
         </div>
       </header>
@@ -84,7 +85,7 @@
           />
         </div>
         <button class="music-toggle" @click="toggleMusic">
-          {{ musicEnabled ? "关闭音乐" : "开启音�? }}
+          {{ musicEnabled ? "关闭音乐" : "开启音乐" }}
         </button>
       </div>
       <div
@@ -146,7 +147,7 @@
               /></label>
               <label
                 ><span
-                  >雾密�?<b>{{ sceneSettings.fogDensity.toFixed(5) }}</b></span
+                  >雾密度 <b>{{ sceneSettings.fogDensity.toFixed(5) }}</b></span
                 ><input
                   v-model.number="sceneSettings.fogDensity"
                   type="range"
@@ -219,7 +220,7 @@
       </div>
       <div class="menu-brand">
         <span>SPACE FLIGHT SIMULATOR</span>
-        <h1>航天任务模拟�?/h1>
+        <h1>航天任务模拟器</h1>
         <p>酒泉发射中心 · 近地轨道任务</p>
       </div>
       <div class="menu-actions hud-panel">
@@ -228,31 +229,32 @@
           @click="enterGame"
           :disabled="enteringGame"
         >
-          <strong>{{ enteringGame ? "正在锁定火箭视角�? : "开始任�? }}</strong>
+          <strong>{{ enteringGame ? "正在锁定火箭视角…" : "开始任务" }}</strong>
           <small>{{
             enteringGame
-              ? "相机准备完成后自动进�?
+              ? "相机准备完成后自动进入"
               : "执行火箭点火、分级与入轨操作"
           }}</small>
         </button>
-        <div class="menu-status"><i></i> 场景资源已就�?/div>
+        <div class="menu-status"><i></i> 场景资源已就绪</div>
       </div>
       <div class="menu-version">
         FLIGHT BUILD 1.0 · WENCHANG · EARTH IMAGERY NASA/GSFC · © 2024-2026
-        康伟�?(kangweitao) · kangweitao1998@163.com · All Rights Reserved
+        康伟涛 (kangweitao) · kangweitao1998@163.com · All Rights Reserved
       </div>
       <div class="menu-disclaimer">
-        【本游戏所有内容纯属虚构，如有雷同，纯属巧合�?      </div>
+        【本游戏所有内容纯属虚构，如有雷同，纯属巧合】
+      </div>
     </section>
 
     <template v-else>
       <header class="top-hud hud-panel">
         <div class="mission-name">
-          <span>航天任务模拟�?/span>
+          <span>航天任务模拟器</span>
           <strong>近地轨道任务</strong>
         </div>
         <div class="altimeter">
-          <small>高度�?/small>
+          <small>高度计</small>
           <div class="digits">{{ altitudeDigits }}</div>
           <b>m</b>
         </div>
@@ -280,7 +282,7 @@
           :disabled="stage.spent || stage.id !== activeStageId"
           @click="activateStage"
         >
-          <span class="engine-symbol">�?/span>
+          <span class="engine-symbol">◉</span>
           <span
             ><b>{{ stage.label }}</b
             ><small>{{ stageStatusText(stage) }}</small></span
@@ -296,7 +298,7 @@
         >
           <span>{{
             launchCountdown !== null
-              ? `倒计�?${launchCountdown}`
+              ? `倒计时 ${launchCountdown}`
               : flight.started
                 ? "分级"
                 : "点火"
@@ -311,7 +313,7 @@
           class="time-slider-toggle-btn"
           :class="{ on: timeSliderOpen }"
           @click="timeSliderOpen = !timeSliderOpen"
-          :title="timeSliderOpen ? '收起时间�? : '展开时间�?"
+          :title="timeSliderOpen ? '收起时间轴' : '展开时间轴'"
         >
           <span class="time-slider-toggle-icon">🕐</span>
         </button>
@@ -342,7 +344,7 @@
           ><em>{{ totalFuel.toFixed(0) }}%</em>
         </div>
         <div class="resource-row">
-          <span>氧化�?/span><i><b :style="{ width: `${totalFuel}%` }"></b></i
+          <span>氧化剂</span><i><b :style="{ width: `${totalFuel}%` }"></b></i
           ><em>{{ totalFuel.toFixed(0) }}%</em>
         </div>
         <div class="resource-row">
@@ -353,11 +355,11 @@
         </div>
         <div class="orbit-readout">
           <div>
-            <span>远拱�?AP</span><b>{{ orbit.ap }}</b
+            <span>远拱点 AP</span><b>{{ orbit.ap }}</b
             ><small> km</small>
           </div>
           <div>
-            <span>近拱�?PE</span><b>{{ orbit.pe }}</b
+            <span>近拱点 PE</span><b>{{ orbit.pe }}</b
             ><small> km</small>
           </div>
           <div>
@@ -374,7 +376,7 @@
         class="maneuver-panel"
       >
         <div class="maneuver-title">
-          <span>机动推进�?/span><b>{{ maneuverFuel.toFixed(0) }}%</b>
+          <span>机动推进剂</span><b>{{ maneuverFuel.toFixed(0) }}%</b>
         </div>
         <div class="maneuver-fuel">
           <i><b :style="{ width: `${maneuverFuel}%` }"></b></i>
@@ -383,29 +385,33 @@
           <button
             :class="{ active: maneuverDirection === 'prograde' }"
             :disabled="maneuverPlan.active"
-            title="沿速度方向施加速度增量，抬高轨道另一�?
+            title="沿速度方向施加速度增量，抬高轨道另一侧"
             @click="maneuverDirection = 'prograde'"
           >
-            轨道加�?          </button>
+            轨道加速
+          </button>
           <button
             :class="{ active: maneuverDirection === 'retrograde' }"
             :disabled="maneuverPlan.active"
-            title="沿速度反方向施加速度增量，降低轨道另一�?
+            title="沿速度反方向施加速度增量，降低轨道另一侧"
             @click="maneuverDirection = 'retrograde'"
           >
-            轨道减�?          </button>
+            轨道减速
+          </button>
           <button
             :class="{ active: maneuverDirection === 'normal' }"
             :disabled="maneuverPlan.active"
             @click="maneuverDirection = 'normal'"
           >
-            左变�?          </button>
+            左变轨
+          </button>
           <button
             :class="{ active: maneuverDirection === 'antinormal' }"
             :disabled="maneuverPlan.active"
             @click="maneuverDirection = 'antinormal'"
           >
-            右变�?          </button>
+            右变轨
+          </button>
         </div>
         <label class="maneuver-dv">
           <span>速度增量 Δv</span><b>{{ maneuverDeltaV }} m/s</b>
@@ -429,11 +435,11 @@
             >机动方向 <b>{{ maneuverDirectionLabel }}</b></span
           >
           <span
-            >预计消�?<b>{{ maneuverFuelCost.toFixed(1) }}%</b></span
+            >预计消耗 <b>{{ maneuverFuelCost.toFixed(1) }}%</b></span
           >
         </div>
         <div v-if="maneuverPlan.active" class="maneuver-node-time">
-          <span>节点倒计�?/span><b>T- {{ maneuverCountdownText }}</b>
+          <span>节点倒计时</span><b>T- {{ maneuverCountdownText }}</b>
         </div>
         <div class="maneuver-actions">
           <button v-if="!maneuverPlan.active" @click="createManeuverPlan">
@@ -500,10 +506,10 @@
           <span class="heading north">N</span><span class="heading east">E</span
           ><span class="heading south">S</span
           ><span class="heading west">W</span>
-          <div class="nav-target target-prograde">�?small>PRO</small></div>
-          <div class="nav-target target-retrograde">�?small>RET</small></div>
-          <div class="nav-target target-normal">�?/div>
-          <div class="nav-target target-radial">�?/div>
+          <div class="nav-target target-prograde">⊙<small>PRO</small></div>
+          <div class="nav-target target-retrograde">⊗<small>RET</small></div>
+          <div class="nav-target target-normal">✦</div>
+          <div class="nav-target target-radial">◆</div>
         </div>
         <div class="heading-tape">
           <div class="tape-ticks"><i v-for="tick in 9" :key="tick"></i></div>
@@ -561,9 +567,10 @@
           <button @click="setThrottle(1)">全开</button
           ><button @click="setThrottle(0)">关闭</button
           ><button @click="setThrottle(Math.min(1, controls.throttle + 0.1))">
-            �?/button
+            ＋</button
           ><button @click="setThrottle(Math.max(0, controls.throttle - 0.1))">
-            �?          </button>
+            −
+          </button>
         </div>
       </HudPanel>
 
@@ -617,7 +624,7 @@
         <button class="home-button" @click="exitToHome" title="返回首页">
           首页
         </button>
-        <button @click="resetMission" title="重新开�?>重置</button>
+        <button @click="resetMission" title="重新开始">重置</button>
       </section>
 
       <section
@@ -631,11 +638,12 @@
         >
           ×
         </button>
-        <span class="badge">�?任务提示</span>
+        <span class="badge">⚠ 任务提示</span>
         <h1>把卫星载荷送入稳定轨道</h1>
         <p>
-          升空后开�?SAS 自动重力转弯，在燃料耗尽时按空格分级。近拱点超过 70 km
-          即完成入轨�?        </p>
+          升空后开启 SAS 自动重力转弯，在燃料耗尽时按空格分级。近拱点超过 70 km
+          即完成入轨。
+        </p>
         <div class="key-guide">
           <span><kbd>SPACE</kbd> 点火/分级</span><span><kbd>W S</kbd> 俯仰</span
           ><span><kbd>A D</kbd> 偏航</span
@@ -645,13 +653,13 @@
 
       <section v-if="crashDialogVisible" class="result-modal hud-panel">
         <h2>火箭坠毁</h2>
-        <button @click="resetMission">重新开�?/button>
+        <button @click="resetMission">重新开始</button>
       </section>
       <div
         v-if="flight.orbitAchieved && !flight.crashed"
         class="orbit-toast hud-panel"
       >
-        <i></i><span>卫星已入�?· 帆板已展开</span>
+        <i></i><span>卫星已入轨 · 帆板已展开</span>
       </div>
       <HudPanel
         v-model:collapsed="missionTasksCollapsed"
@@ -662,9 +670,9 @@
           <div v-for="task in missionTasks" :key="task.id" :class="task.status">
             <i>{{
               task.status === "completed"
-                ? "�?
+                ? "✓"
                 : task.status === "active"
-                  ? "�?
+                  ? "▶"
                   : "·"
             }}</i>
             <span
@@ -684,7 +692,7 @@
           <div class="satellite-camera-side">
             <div class="satellite-camera-actions">
               <button @click="toggleSatelliteCamera">
-                {{ satelliteCameraOpen ? "关闭相机" : "开启相�? }}
+                {{ satelliteCameraOpen ? "关闭相机" : "开启相机" }}
               </button>
               <button
                 v-if="satelliteCameraOpen"
@@ -701,7 +709,7 @@
               <i></i
               >{{
                 groundLinkActive
-                  ? `测控链路�?{groundLinkName}`
+                  ? `测控链路：${groundLinkName}`
                   : "暂无测控链路"
               }}
             </div>
@@ -810,10 +818,10 @@
           ×
         </button>
         <div class="photo-preview-toolbar">
-          <button @click="zoomPreview(-0.2)" title="缩小">�?/button>
-          <button @click="zoomPreview(0.2)" title="放大">�?/button>
-          <button @click="rotatePreview(-90)" title="向左旋转">�?/button>
-          <button @click="rotatePreview(90)" title="向右旋转">�?/button>
+          <button @click="zoomPreview(-0.2)" title="缩小">−</button>
+          <button @click="zoomPreview(0.2)" title="放大">＋</button>
+          <button @click="rotatePreview(-90)" title="向左旋转">↶</button>
+          <button @click="rotatePreview(90)" title="向右旋转">↷</button>
           <button @click="resetPhotoPreview" title="复位">复位</button>
         </div>
         <div
@@ -845,7 +853,7 @@
         {{ systemMessage.text }}
       </div>
       <div v-if="launchCountdown !== null" class="launch-countdown">
-        <small>发射倒计�?/small><b>{{ launchCountdown }}</b>
+        <small>发射倒计时</small><b>{{ launchCountdown }}</b>
       </div>
 
       <div class="control-hint">
@@ -952,8 +960,8 @@ const missionTasks = computed(() => {
       title: "卫星变轨",
       status: maneuver ? "completed" : orbit ? "active" : "locked",
       detail: maneuver
-        ? `已执�?${missionState.maneuverCount} 次`
-        : "至少执行一次变�?,
+        ? `已执行 ${missionState.maneuverCount} 次`
+        : "至少执行一次变轨",
     },
     {
       id: 4,
@@ -966,10 +974,10 @@ const missionTasks = computed(() => {
             ? "active"
             : "locked",
       detail: photoDownlinked
-        ? "照片已下�?
+        ? "照片已下传"
         : photoTaken
           ? "已拍摄，等待下传"
-          : "拍摄照片并下传给测控�?,
+          : "拍摄照片并下传给测控站",
     },
   ];
 });
@@ -986,7 +994,7 @@ const maneuverFuel = ref(100);
 const cameraDistanceText = computed(() => {
   const kilometers = cameraHeight.value / 1000;
   return kilometers >= 10000
-    ? `${(kilometers / 10000).toFixed(1)} �?km`
+    ? `${(kilometers / 10000).toFixed(1)} 万 km`
     : `${Math.round(kilometers).toLocaleString()} km`;
 });
 const maneuverPlan = reactive({
@@ -1014,7 +1022,7 @@ const DEFAULT_SCENE_SETTINGS = {
   atmosphere: true,
   depthOfField: false,
   fog: true,
-  shadows: true,
+  shadows: false,
   antialiasing: true,
   hdr: false,
   sun: true,
@@ -1041,13 +1049,13 @@ const sceneSettings = reactive({
 });
 const sceneSettingOptions = [
   { key: "atmosphere", label: "大气效果", description: "地表大气层与天空散射" },
-  { key: "depthOfField", label: "景深", description: "远距离场景焦外模�? },
+  { key: "depthOfField", label: "景深", description: "远距离场景焦外模糊" },
   { key: "fog", label: "雾效", description: "地平线及远景雾化" },
-  { key: "shadows", label: "动态阴�?, description: "模型及地表实时阴�? },
-  { key: "antialiasing", label: "抗锯�?, description: "平滑模型和轨道边�? },
-  { key: "hdr", label: "高动态范�?, description: "提升明暗层次和光照细�? },
+  { key: "shadows", label: "动态阴影", description: "模型及地表实时阴影" },
+  { key: "antialiasing", label: "抗锯齿", description: "平滑模型和轨道边缘" },
+  { key: "hdr", label: "高动态范围", description: "提升明暗层次和光照细节" },
   { key: "sun", label: "太阳光源", description: "启用太阳方向光照" },
-  { key: "showFps", label: "显示帧率", description: "显示 Cesium 性能监视�? },
+  { key: "showFps", label: "显示帧率", description: "显示 Cesium 性能监视器" },
 ];
 const selectedMusic = ref("vastness");
 const MUSIC_PRESETS = [
@@ -1055,31 +1063,31 @@ const MUSIC_PRESETS = [
     id: "feedback-dreams",
     name: "Feedback Dreams",
     description: "背景音乐",
-    src: `${import.meta.env.BASE_URL}musics/bg/Feedback-Dreams.mp3",
+    src: B + "musics/bg/Feedback-Dreams.mp3",
   },
   {
     id: "opalescent",
     name: "Opalescent",
     description: "背景音乐",
-    src: `${import.meta.env.BASE_URL}musics/bg/Opalescent.mp3",
+    src: B + "musics/bg/Opalescent.mp3",
   },
   {
     id: "vastness",
     name: "Vastness",
     description: "背景音乐",
-    src: `${import.meta.env.BASE_URL}musics/bg/Vastness.mp3",
+    src: B + "musics/bg/Vastness.mp3",
   },
   {
     id: "voxscape",
     name: "Voxscape",
     description: "背景音乐",
-    src: `${import.meta.env.BASE_URL}musics/bg/Voxscape.mp3",
+    src: B + "musics/bg/Voxscape.mp3",
   },
   {
     id: "xanthos",
     name: "Xanthos",
     description: "背景音乐",
-    src: `${import.meta.env.BASE_URL}musics/bg/Xanthos.mp3",
+    src: B + "musics/bg/Xanthos.mp3",
   },
 ];
 const timeWarp = ref(1);
@@ -1090,38 +1098,39 @@ const launchCountdown = ref(null);
 const systemMessage = reactive({ text: "", type: "info" });
 let systemMessageTimer;
 const RESOURCE_COUNT = 26;
+const B = import.meta.env.BASE_URL;
 const SKYBOX_SOURCES = {
-  positiveX: `${import.meta.env.BASE_URL}images/3/tycho2t3_80_px.jpg",
-  negativeX: `${import.meta.env.BASE_URL}images/3/tycho2t3_80_mx.jpg",
-  positiveY: `${import.meta.env.BASE_URL}images/3/tycho2t3_80_py.jpg",
-  negativeY: `${import.meta.env.BASE_URL}images/3/tycho2t3_80_my.jpg",
-  positiveZ: `${import.meta.env.BASE_URL}images/3/tycho2t3_80_pz.jpg",
-  negativeZ: `${import.meta.env.BASE_URL}images/3/tycho2t3_80_mz.jpg",
+  positiveX: B + "images/3/tycho2t3_80_px.jpg",
+  negativeX: B + "images/3/tycho2t3_80_mx.jpg",
+  positiveY: B + "images/3/tycho2t3_80_py.jpg",
+  negativeY: B + "images/3/tycho2t3_80_my.jpg",
+  positiveZ: B + "images/3/tycho2t3_80_pz.jpg",
+  negativeZ: B + "images/3/tycho2t3_80_mz.jpg",
 };
 const GROUND_SKYBOX_SOURCES = {
   day: {
-    positiveX: `${import.meta.env.BASE_URL}images/skyBox_in/1/Right.png",
-    negativeX: `${import.meta.env.BASE_URL}images/skyBox_in/1/Left.png",
-    positiveY: `${import.meta.env.BASE_URL}images/skyBox_in/1/Back.png",
-    negativeY: `${import.meta.env.BASE_URL}images/skyBox_in/1/Front.png",
-    positiveZ: `${import.meta.env.BASE_URL}images/skyBox_in/1/Up.png",
-    negativeZ: `${import.meta.env.BASE_URL}images/skyBox_in/1/Down.png",
+    positiveX: B + "images/skyBox_in/1/Right.png",
+    negativeX: B + "images/skyBox_in/1/Left.png",
+    positiveY: B + "images/skyBox_in/1/Back.png",
+    negativeY: B + "images/skyBox_in/1/Front.png",
+    positiveZ: B + "images/skyBox_in/1/Up.png",
+    negativeZ: B + "images/skyBox_in/1/Down.png",
   },
   sunset: {
-    positiveX: `${import.meta.env.BASE_URL}images/skyBox_in/2/Right.png",
-    negativeX: `${import.meta.env.BASE_URL}images/skyBox_in/2/Left.png",
-    positiveY: `${import.meta.env.BASE_URL}images/skyBox_in/2/Back.png",
-    negativeY: `${import.meta.env.BASE_URL}images/skyBox_in/2/Front.png",
-    positiveZ: `${import.meta.env.BASE_URL}images/skyBox_in/2/Up.png",
-    negativeZ: `${import.meta.env.BASE_URL}images/skyBox_in/2/Down.png",
+    positiveX: B + "images/skyBox_in/2/Right.png",
+    negativeX: B + "images/skyBox_in/2/Left.png",
+    positiveY: B + "images/skyBox_in/2/Back.png",
+    negativeY: B + "images/skyBox_in/2/Front.png",
+    positiveZ: B + "images/skyBox_in/2/Up.png",
+    negativeZ: B + "images/skyBox_in/2/Down.png",
   },
   night: {
-    positiveX: `${import.meta.env.BASE_URL}images/skyBox_in/3/Right.png",
-    negativeX: `${import.meta.env.BASE_URL}images/skyBox_in/3/Left.png",
-    positiveY: `${import.meta.env.BASE_URL}images/skyBox_in/3/Back.png",
-    negativeY: `${import.meta.env.BASE_URL}images/skyBox_in/3/Front.png",
-    positiveZ: `${import.meta.env.BASE_URL}images/skyBox_in/3/Up.png",
-    negativeZ: `${import.meta.env.BASE_URL}images/skyBox_in/3/Down.png",
+    positiveX: B + "images/skyBox_in/3/Right.png",
+    negativeX: B + "images/skyBox_in/3/Left.png",
+    positiveY: B + "images/skyBox_in/3/Back.png",
+    negativeY: B + "images/skyBox_in/3/Front.png",
+    positiveZ: B + "images/skyBox_in/3/Up.png",
+    negativeZ: B + "images/skyBox_in/3/Down.png",
   },
 };
 const SKYBOX_SWITCH_HEIGHT = 10000;
@@ -1198,56 +1207,56 @@ let groundLinkStation;
 const groundLinkActive = ref(false);
 const groundLinkName = ref("");
 const trackingStationSeed = [
-  { name: "模拟测控�?01", lon: 128.4, lat: 45.6, heading: 18 },
-  { name: "模拟测控�?02", lon: 78.2, lat: 38.1, heading: -22 },
-  { name: "模拟测控�?03", lon: 111.8, lat: 20.4, heading: 35 },
-  { name: "模拟测控�?04", lon: 106.7, lat: 33.6, heading: 8 },
-  { name: "模拟测控�?05", lon: 118.6, lat: 41.2, heading: -15 },
-  { name: "模拟测控�?06", lon: 122.1, lat: 35.2, heading: 26 },
-  { name: "模拟测控�?07", lon: 108.2, lat: 31.8, heading: 9 },
-  { name: "模拟测控�?08", lon: 99.4, lat: 26.7, heading: -18 },
-  { name: "模拟测控�?09", lon: 116.9, lat: 25.1, heading: 14 },
-  { name: "模拟测控�?10", lon: 114.8, lat: 27.4, heading: 24 },
-  { name: "模拟测控�?11", lon: 113.2, lat: 23.8, heading: -8 },
-  { name: "模拟测控�?12", lon: 97.1, lat: 41.8, heading: 12 },
-  { name: "模拟测控�?13", lon: 109.8, lat: 19.1, heading: -12 },
-  { name: "模拟测控�?14", lon: 110.2, lat: 36.4, heading: 17 },
-  { name: "模拟测控�?15", lon: 92.7, lat: 30.5, heading: -20 },
-  { name: "模拟测控�?16", lon: 103.4, lat: 35.8, heading: 7 },
-  { name: "模拟测控�?17", lon: 88.9, lat: 42.6, heading: 22 },
-  { name: "模拟测控�?18", lon: 105.6, lat: 29.8, heading: -14 },
-  { name: "模拟测控�?19", lon: 107.2, lat: 23.5, heading: 11 },
-  { name: "模拟测控�?20", lon: 124.9, lat: 46.2, heading: -9 },
+  { name: "模拟测控站-01", lon: 128.4, lat: 45.6, heading: 18 },
+  { name: "模拟测控站-02", lon: 78.2, lat: 38.1, heading: -22 },
+  { name: "模拟测控站-03", lon: 111.8, lat: 20.4, heading: 35 },
+  { name: "模拟测控站-04", lon: 106.7, lat: 33.6, heading: 8 },
+  { name: "模拟测控站-05", lon: 118.6, lat: 41.2, heading: -15 },
+  { name: "模拟测控站-06", lon: 122.1, lat: 35.2, heading: 26 },
+  { name: "模拟测控站-07", lon: 108.2, lat: 31.8, heading: 9 },
+  { name: "模拟测控站-08", lon: 99.4, lat: 26.7, heading: -18 },
+  { name: "模拟测控站-09", lon: 116.9, lat: 25.1, heading: 14 },
+  { name: "模拟测控站-10", lon: 114.8, lat: 27.4, heading: 24 },
+  { name: "模拟测控站-11", lon: 113.2, lat: 23.8, heading: -8 },
+  { name: "模拟测控站-12", lon: 97.1, lat: 41.8, heading: 12 },
+  { name: "模拟测控站-13", lon: 109.8, lat: 19.1, heading: -12 },
+  { name: "模拟测控站-14", lon: 110.2, lat: 36.4, heading: 17 },
+  { name: "模拟测控站-15", lon: 92.7, lat: 30.5, heading: -20 },
+  { name: "模拟测控站-16", lon: 103.4, lat: 35.8, heading: 7 },
+  { name: "模拟测控站-17", lon: 88.9, lat: 42.6, heading: 22 },
+  { name: "模拟测控站-18", lon: 105.6, lat: 29.8, heading: -14 },
+  { name: "模拟测控站-19", lon: 107.2, lat: 23.5, heading: 11 },
+  { name: "模拟测控站-20", lon: 124.9, lat: 46.2, heading: -9 },
   {
-    name: "模拟境外�?A",
+    name: "模拟境外站-A",
     lon: 68.5,
     lat: 26.2,
     heading: 15,
     category: "overseas",
   },
   {
-    name: "模拟境外�?B",
+    name: "模拟境外站-B",
     lon: 42.3,
     lat: -4.1,
     heading: -18,
     category: "overseas",
   },
   {
-    name: "模拟境外�?C",
+    name: "模拟境外站-C",
     lon: 16.8,
     lat: -24.4,
     heading: 16,
     category: "overseas",
   },
   {
-    name: "模拟境外�?D",
+    name: "模拟境外站-D",
     lon: -68.2,
     lat: -31.6,
     heading: 8,
     category: "overseas",
   },
   {
-    name: "模拟境外�?E",
+    name: "模拟境外站-E",
     lon: -66.8,
     lat: -36.4,
     heading: -12,
@@ -1313,7 +1322,7 @@ const stages = reactive([
   },
   {
     id: 4,
-    label: "整流�?,
+    label: "整流罩",
     fuel: 0,
     dryMass: 3000,
     fuelMass: 0,
@@ -1335,7 +1344,7 @@ const stages = reactive([
   },
   {
     id: 2,
-    label: "一级火�?,
+    label: "一级火箭",
     fuel: 100,
     dryMass: 18000,
     fuelMass: 55000,
@@ -1346,7 +1355,7 @@ const stages = reactive([
   },
   {
     id: 1,
-    label: "助推�?,
+    label: "助推器",
     fuel: 100,
     dryMass: 12000,
     fuelMass: 40000,
@@ -1512,10 +1521,10 @@ function createMapIcon(type, color, size = 48) {
   return image;
 }
 const componentDefinitions = [
-  { id: 1, name: "助推�?, offset: [0, 0, -31], drift: [5.5, 0, -1.5] },
-  { id: 2, name: "一级火�?, offset: [0, 0, -28], drift: [-2.2, 0, -2.2] },
+  { id: 1, name: "助推器", offset: [0, 0, -31], drift: [5.5, 0, -1.5] },
+  { id: 2, name: "一级火箭", offset: [0, 0, -28], drift: [-2.2, 0, -2.2] },
   { id: 3, name: "二级火箭", offset: [0, 0, -14], drift: [1.8, 0, -1.7] },
-  { id: 4, name: "整流�?, offset: [0, 0, -2], drift: [3.8, 0, -1.2] },
+  { id: 4, name: "整流罩", offset: [0, 0, -2], drift: [3.8, 0, -1.2] },
   { id: 5, name: "三级火箭", offset: [0, 0, -5], drift: [-1.4, 0, -1.2] },
   { id: 6, name: "卫星", offset: [0, 0, 0], drift: [0, 0, 0] },
 ];
@@ -1612,8 +1621,8 @@ const situation = computed(() =>
     : flight.altitude > 70000
       ? "太空飞行"
       : flight.started
-        ? "上升�?
-        : "发射�?,
+        ? "上升中"
+        : "发射台",
 );
 const speedMode = computed(() =>
   flight.altitude > 35000 ? "轨道速度" : "地表速度",
@@ -1635,10 +1644,10 @@ const maneuverFuelCost = computed(() => maneuverDeltaV.value / 8);
 const maneuverDirectionLabel = computed(
   () =>
     ({
-      prograde: "轨道加�?,
-      retrograde: "轨道减�?,
-      normal: "左变�?,
-      antinormal: "右变�?,
+      prograde: "轨道加速",
+      retrograde: "轨道减速",
+      normal: "左变轨",
+      antinormal: "右变轨",
     })[maneuverDirection.value],
 );
 const plannedOrbitReadout = computed(() => {
@@ -1682,7 +1691,7 @@ const orbit = computed(() => {
   const energy = v2 / 2 - KERBIN_MU / r;
   if (energy >= 0)
     return {
-      ap: "逃�?,
+      ap: "逃逸",
       pe: Math.max(-600, flight.altitude / 1000).toFixed(0),
     };
   const a = -KERBIN_MU / (2 * energy);
@@ -1920,14 +1929,14 @@ function exitToHome() {
 }
 
 function stageStatusText(stage) {
-  if (stage.spent) return stage.id === 4 ? "已抛�? : "已分�?;
+  if (stage.spent) return stage.id === 4 ? "已抛离" : "已分离";
   if (stage.id !== activeStageId.value) return "待命";
   if (
     ignitionSchedule.has(stage.id) &&
     flight.time < ignitionSchedule.get(stage.id)
   )
     return "等待点火";
-  return stage.propulsion ? "点火�? : "准备抛离";
+  return stage.propulsion ? "点火中" : "准备抛离";
 }
 
 function activateStage() {
@@ -1966,11 +1975,11 @@ function speakCountdown(text) {
 function startLaunchCountdown() {
   if (launchCountdown.value !== null) return;
   launchCountdown.value = 3;
-  speakCountdown("�?);
+  speakCountdown("三");
   launchCountdownTimer = window.setInterval(() => {
     if (launchCountdown.value > 1) {
       launchCountdown.value -= 1;
-      speakCountdown(launchCountdown.value === 2 ? "�? : "一");
+      speakCountdown(launchCountdown.value === 2 ? "二" : "一");
       return;
     }
     window.clearInterval(launchCountdownTimer);
@@ -1998,12 +2007,12 @@ function igniteLaunch() {
 
 function ensureEngineAudio() {
   if (engineLoopAudio) return;
-  engineLoopAudio = new Audio(`${import.meta.env.BASE_URL}sounds/rocket-engine.mp3");
+  engineLoopAudio = new Audio(B + "sounds/rocket-engine.mp3");
   engineLoopAudio.preload = "auto";
   engineLoopAudio.loop = false;
-  engineIgnitionAudio = new Audio(`${import.meta.env.BASE_URL}sounds/rocket-ignition.mp3");
+  engineIgnitionAudio = new Audio(B + "sounds/rocket-ignition.mp3");
   engineIgnitionAudio.preload = "auto";
-  explosionAudio = new Audio(`${import.meta.env.BASE_URL}sounds/rocket-explosion.mp3");
+  explosionAudio = new Audio(B + "sounds/rocket-explosion.mp3");
   explosionAudio.preload = "auto";
 }
 
@@ -2526,7 +2535,7 @@ function rejectManeuver(message) {
 
 function createManeuverPlan() {
   if (!flight.orbitAchieved) {
-    rejectManeuver("卫星尚未入轨，无法创建变轨节�?);
+    rejectManeuver("卫星尚未入轨，无法创建变轨节点");
     return;
   }
   if (!orbitalState) {
@@ -2673,7 +2682,7 @@ function createManeuverPlan() {
     const semiMajorAxis = -KERBIN_MU / (2 * energy);
     const oppositeRadius = semiMajorAxis * 2 - burnRadius;
     if (oppositeRadius <= KERBIN_RADIUS + 10000) {
-      rejectManeuver("预测近拱点低�?10 km 安全高度");
+      rejectManeuver("预测近拱点低于 10 km 安全高度");
       return;
     }
     const periapsis = Math.min(burnRadius, oppositeRadius);
@@ -2695,7 +2704,7 @@ function createManeuverPlan() {
   maneuverPlan.armed = false;
   maneuverPlan.nodeAngle = nodeAngle;
   maneuverPlan.plannedState = plannedState;
-  maneuverPlan.message = "机动节点已创�?;
+  maneuverPlan.message = "机动节点已创建";
   showSystemMessage("机动节点创建成功", "success");
   maneuverPreviewRing = createOrbitPolyline(
     plannedState,
@@ -2777,7 +2786,7 @@ function executeManeuver() {
   maneuverPlan.armed = false;
   maneuverPlan.plannedState = null;
   maneuverPlan.message = "变轨完成";
-  showSystemMessage("变轨执行完成，卫星已进入新轨�?, "success");
+  showSystemMessage("变轨执行完成，卫星已进入新轨道", "success");
 }
 
 function clearManeuverEntities() {
@@ -2803,7 +2812,7 @@ function triggerCrashExplosion() {
   if (engineLoopAudio) engineLoopAudio.pause();
   engineWasOn = false;
   if (!explosionAudio) {
-    explosionAudio = new Audio(`${import.meta.env.BASE_URL}sounds/rocket-explosion.mp3");
+    explosionAudio = new Audio(B + "sounds/rocket-explosion.mp3");
     explosionAudio.preload = "auto";
   }
   explosionAudio.currentTime = 0;
@@ -2820,7 +2829,7 @@ function triggerCrashExplosion() {
       24,
     ),
     billboard: {
-      image: `${import.meta.env.BASE_URL}images/boom.png",
+      image: B + "images/boom.png",
       width: 960,
       height: 960,
       imageSubRegion: new Cesium.BoundingRectangle(0, 1000, tileSize, tileSize),
@@ -2985,7 +2994,7 @@ function captureHighlightModelState() {
 async function initializeHighlightModel() {
   if (!viewer || rocketHighlightModel) return;
   rocketHighlightModel = await Cesium.Model.fromGltfAsync({
-    url: `${import.meta.env.BASE_URL}models/rocket_model.glb",
+    url: B + "models/rocket_model.glb",
     modelMatrix: Cesium.Matrix4.IDENTITY.clone(),
     scale: 1.2,
     minimumPixelSize: 0,
@@ -3135,7 +3144,7 @@ function componentPopupHtml(definition) {
         ? "轨道运行"
         : "载荷待命"
       : separated
-        ? "已分�?
+        ? "已分离"
         : stageStatusText(stage);
   const fuel = stage?.propulsion
     ? stage.fuel
@@ -3154,7 +3163,7 @@ function componentPopupHtml(definition) {
         <div><dt>速度</dt><dd>${speed} m/s</dd></div>
         <div><dt>推力</dt><dd>${(thrust / 1000).toFixed(0)} kN</dd></div>
         <div><dt>任务时间</dt><dd>${missionTime.value.replace("T+ ", "")}</dd></div>
-        <div><dt>部件质量</dt><dd>${stage ? Math.round(stage.dryMass + (stage.fuelMass * stage.fuel) / 100).toLocaleString() : "�?} kg</dd></div>
+        <div><dt>部件质量</dt><dd>${stage ? Math.round(stage.dryMass + (stage.fuelMass * stage.fuel) / 100).toLocaleString() : "—"} kg</dd></div>
         <div><dt>部件编号</dt><dd>${definition.id === 6 ? "PAYLOAD" : definition.id === 1 ? "BOOSTER" : `STAGE ${definition.id}`}</dd></div>
       </dl>
       <div class="component-popup-fuel"><span>${stage?.propulsion ? "剩余燃料" : definition.id === 6 ? "变轨能量" : "无推进剂"}</span><b>${fuel.toFixed(0)}%</b><i><em style="width:${fuel}%"></em></i></div>
@@ -3396,7 +3405,7 @@ async function initializeScene() {
     selectionIndicator: false,
     terrainProvider: new Cesium.EllipsoidTerrainProvider(),
     requestRenderMode: false,
-    shadows: true,
+    shadows: false,
   });
   viewer.screenSpaceEventHandler.removeInputAction(
     Cesium.ScreenSpaceEventType.LEFT_CLICK,
@@ -3424,10 +3433,11 @@ async function initializeScene() {
   const BLEND_DURATION = 3000;
   const FAR_BLEND_DURATION = 6000;
   let lastCameraHeight = null;
-  const BLEND_COOLDOWN = 4000; // 渐变完成后冷却期，防止频繁切换闪�?
+  const BLEND_COOLDOWN = 4000; // 渐变完成后冷却期，防止频繁切换闪烁
+
   // 迟滞阈值：白天→夜晚需要太阳明显落下去，夜晚→白天需要太阳明显升起来
   const SKYBOX_THRESHOLDS = { dayDown: -0.05, nightUp: 0.05 };
-  // 远近切换迟滞：进入近�?< low，回到远�?> high
+  // 远近切换迟滞：进入近景 < low，回到远景 > high
   const NEAR_LOW = 1500;
   const NEAR_HIGH = 15000;
   currentSkyKey = "far";
@@ -3466,7 +3476,8 @@ async function initializeScene() {
       ? cameraHeight > NEAR_LOW
       : cameraHeight > NEAR_HIGH;
 
-    // 用迟滞逻辑决定目标天空�?key（白�?夜晚�?    let targetKey;
+    // 用迟滞逻辑决定目标天空盒 key（白天/夜晚）
+    let targetKey;
     if (forceFarSkybox) {
       targetKey = "far";
       // 相机飞到足够高后自动解除强制远景
@@ -3504,7 +3515,8 @@ async function initializeScene() {
     skyBox.sunHeight = sunHeight;
     skyBox.atmosphereIntensity = targetKey === "far" ? 0 : 0.45;
 
-    // 大气层和雾：远景正常，近景关�?    if (targetKey === "far") {
+    // 大气层和雾：远景正常，近景关闭
+    if (targetKey === "far") {
       viewer.scene.skyAtmosphere.show = true;
       viewer.scene.fog.enabled = true;
     } else {
@@ -3533,9 +3545,10 @@ async function initializeScene() {
         }
         const elapsed = performance.now() - blendState.startTime;
         const t = Math.min(elapsed / blendState.duration, 1.0);
-        // smoothstep 缓动，避免线性渐变的生硬�?        skyBox.blendFactor = t * t * (3 - 2 * t);
+        // smoothstep 缓动，避免线性渐变的生硬感
+        skyBox.blendFactor = t * t * (3 - 2 * t);
         if (skyBox.blendFactor >= 1.0) {
-          // 销毁旧 cubeMap，替换为�?cubeMap
+          // 销毁旧 cubeMap，替换为新 cubeMap
           if (skyBox._cubeMap) skyBox._cubeMap.destroy();
           skyBox._cubeMap = skyBox._cubeMap2;
           skyBox._cubeMap2 = undefined;
@@ -3550,8 +3563,8 @@ async function initializeScene() {
           lastBlendCompleteTime = performance.now();
         }
       } else {
-        // GroundSkyBox 不支�?sources2 渐变，直接切�?sources
-        // 只设�?sources，不设置 _sources，让 update 检测到变化并重新加�?cubeMap
+        // GroundSkyBox 不支持 sources2 渐变，直接切换 sources
+        // 只设置 sources，不设置 _sources，让 update 检测到变化并重新加载 cubeMap
         skyBox.sources = blendState.pending;
         skyBox.blendFactor = 0;
         blendState.active = false;
@@ -3644,7 +3657,7 @@ async function initializeScene() {
   });
   createComponentPoints();
   const rocketModelPromise = Cesium.Model.fromGltfAsync({
-    url: `${import.meta.env.BASE_URL}models/rocket_model.glb",
+    url: B + "models/rocket_model.glb",
     modelMatrix: Cesium.Matrix4.IDENTITY.clone(),
     scale: 1.2,
     minimumPixelSize: 48,
@@ -3711,7 +3724,7 @@ function createTrackingStations() {
       position,
       orientation,
       model: {
-        uri: `${import.meta.env.BASE_URL}models/leida.glb",
+        uri: B + "models/leida.glb",
         scale: 5,
         distanceDisplayCondition: nearRange,
         heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
@@ -3792,7 +3805,7 @@ function loadLaunchStation() {
     new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(STATION_HEADING), 0, 0),
   );
   return Cesium.Model.fromGltfAsync({
-    url: `${import.meta.env.BASE_URL}models/lauch_station.glb",
+    url: B + "models/lauch_station.glb",
     modelMatrix,
     scale: STATION_SCALE,
     maximumScale: STATION_SCALE,
@@ -3841,7 +3854,7 @@ function preloadSkyboxImages() {
             resolve();
           };
           image.onerror = () =>
-            reject(new Error(`天空盒图片加载失�? ${source}`));
+            reject(new Error(`天空盒图片加载失败: ${source}`));
           image.src = source;
         }),
     ),
@@ -4072,7 +4085,8 @@ function updateTimeSlider(e) {
 function setGlobalView() {
   if (!viewer || cameraMode.value !== "orbit") return;
   globalViewActive.value = true;
-  // 强制远景天空盒，避免相机飞行过程中触发渐�?  forceFarSkybox = true;
+  // 强制远景天空盒，避免相机飞行过程中触发渐变
+  forceFarSkybox = true;
   // 立即切换到远景天空盒
   currentSkyKey = "far";
   blendState.active = false;
@@ -4243,7 +4257,7 @@ function updateSatelliteCameraView() {
 async function takeSatellitePhoto() {
   if (!viewer || !flight.orbitAchieved || photoCapturing.value) return;
   if (photos.value.length >= 8) {
-    showSystemMessage("相册已满，最多保�?8 张照片，请先删除照片", "error");
+    showSystemMessage("相册已满，最多保存 8 张照片，请先删除照片", "error");
     return;
   }
   if (satelliteCameraViewer && !satelliteCameraViewer.isDestroyed()) {
@@ -4258,8 +4272,8 @@ async function takeSatellitePhoto() {
       previewPhoto(photo);
       showSystemMessage(
         photos.value.length >= 3
-          ? "全部任务已完�?
-          : `拍摄进度�?{photos.value.length}/3`,
+          ? "全部任务已完成"
+          : `拍摄进度：${photos.value.length}/3`,
         "success",
       );
     } finally {
@@ -4331,8 +4345,8 @@ async function takeSatellitePhoto() {
     previewPhoto(photo);
     showSystemMessage(
       photos.value.length >= 3
-        ? "全部任务已完�?
-        : `拍摄进度�?{photos.value.length}/3`,
+        ? "全部任务已完成"
+        : `拍摄进度：${photos.value.length}/3`,
       "success",
     );
   } catch (error) {
@@ -4746,7 +4760,8 @@ onMounted(async () => {
 
   try {
     await initializeScene();
-    // 首页首次真实交互时自动播放音�?    const startMusic = () => {
+    // 首页首次真实交互时自动播放音乐
+    const startMusic = () => {
       startMusicOnFirstInteraction();
       document.removeEventListener("pointerdown", startMusic);
       document.removeEventListener("mousemove", startMusic);
