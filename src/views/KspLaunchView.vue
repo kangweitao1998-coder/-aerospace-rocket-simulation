@@ -1055,31 +1055,31 @@ const MUSIC_PRESETS = [
     id: "feedback-dreams",
     name: "Feedback Dreams",
     description: "背景音乐",
-    src: "./musics/bg/Feedback-Dreams.mp3",
+    src: `${import.meta.env.BASE_URL}musics/bg/Feedback-Dreams.mp3",
   },
   {
     id: "opalescent",
     name: "Opalescent",
     description: "背景音乐",
-    src: "./musics/bg/Opalescent.mp3",
+    src: `${import.meta.env.BASE_URL}musics/bg/Opalescent.mp3",
   },
   {
     id: "vastness",
     name: "Vastness",
     description: "背景音乐",
-    src: "./musics/bg/Vastness.mp3",
+    src: `${import.meta.env.BASE_URL}musics/bg/Vastness.mp3",
   },
   {
     id: "voxscape",
     name: "Voxscape",
     description: "背景音乐",
-    src: "./musics/bg/Voxscape.mp3",
+    src: `${import.meta.env.BASE_URL}musics/bg/Voxscape.mp3",
   },
   {
     id: "xanthos",
     name: "Xanthos",
     description: "背景音乐",
-    src: "./musics/bg/Xanthos.mp3",
+    src: `${import.meta.env.BASE_URL}musics/bg/Xanthos.mp3",
   },
 ];
 const timeWarp = ref(1);
@@ -1091,37 +1091,37 @@ const systemMessage = reactive({ text: "", type: "info" });
 let systemMessageTimer;
 const RESOURCE_COUNT = 26;
 const SKYBOX_SOURCES = {
-  positiveX: "./images/3/tycho2t3_80_px.jpg",
-  negativeX: "./images/3/tycho2t3_80_mx.jpg",
-  positiveY: "./images/3/tycho2t3_80_py.jpg",
-  negativeY: "./images/3/tycho2t3_80_my.jpg",
-  positiveZ: "./images/3/tycho2t3_80_pz.jpg",
-  negativeZ: "./images/3/tycho2t3_80_mz.jpg",
+  positiveX: `${import.meta.env.BASE_URL}images/3/tycho2t3_80_px.jpg",
+  negativeX: `${import.meta.env.BASE_URL}images/3/tycho2t3_80_mx.jpg",
+  positiveY: `${import.meta.env.BASE_URL}images/3/tycho2t3_80_py.jpg",
+  negativeY: `${import.meta.env.BASE_URL}images/3/tycho2t3_80_my.jpg",
+  positiveZ: `${import.meta.env.BASE_URL}images/3/tycho2t3_80_pz.jpg",
+  negativeZ: `${import.meta.env.BASE_URL}images/3/tycho2t3_80_mz.jpg",
 };
 const GROUND_SKYBOX_SOURCES = {
   day: {
-    positiveX: "./images/skyBox_in/1/Right.png",
-    negativeX: "./images/skyBox_in/1/Left.png",
-    positiveY: "./images/skyBox_in/1/Back.png",
-    negativeY: "./images/skyBox_in/1/Front.png",
-    positiveZ: "./images/skyBox_in/1/Up.png",
-    negativeZ: "./images/skyBox_in/1/Down.png",
+    positiveX: `${import.meta.env.BASE_URL}images/skyBox_in/1/Right.png",
+    negativeX: `${import.meta.env.BASE_URL}images/skyBox_in/1/Left.png",
+    positiveY: `${import.meta.env.BASE_URL}images/skyBox_in/1/Back.png",
+    negativeY: `${import.meta.env.BASE_URL}images/skyBox_in/1/Front.png",
+    positiveZ: `${import.meta.env.BASE_URL}images/skyBox_in/1/Up.png",
+    negativeZ: `${import.meta.env.BASE_URL}images/skyBox_in/1/Down.png",
   },
   sunset: {
-    positiveX: "./images/skyBox_in/2/Right.png",
-    negativeX: "./images/skyBox_in/2/Left.png",
-    positiveY: "./images/skyBox_in/2/Back.png",
-    negativeY: "./images/skyBox_in/2/Front.png",
-    positiveZ: "./images/skyBox_in/2/Up.png",
-    negativeZ: "./images/skyBox_in/2/Down.png",
+    positiveX: `${import.meta.env.BASE_URL}images/skyBox_in/2/Right.png",
+    negativeX: `${import.meta.env.BASE_URL}images/skyBox_in/2/Left.png",
+    positiveY: `${import.meta.env.BASE_URL}images/skyBox_in/2/Back.png",
+    negativeY: `${import.meta.env.BASE_URL}images/skyBox_in/2/Front.png",
+    positiveZ: `${import.meta.env.BASE_URL}images/skyBox_in/2/Up.png",
+    negativeZ: `${import.meta.env.BASE_URL}images/skyBox_in/2/Down.png",
   },
   night: {
-    positiveX: "./images/skyBox_in/3/Right.png",
-    negativeX: "./images/skyBox_in/3/Left.png",
-    positiveY: "./images/skyBox_in/3/Back.png",
-    negativeY: "./images/skyBox_in/3/Front.png",
-    positiveZ: "./images/skyBox_in/3/Up.png",
-    negativeZ: "./images/skyBox_in/3/Down.png",
+    positiveX: `${import.meta.env.BASE_URL}images/skyBox_in/3/Right.png",
+    negativeX: `${import.meta.env.BASE_URL}images/skyBox_in/3/Left.png",
+    positiveY: `${import.meta.env.BASE_URL}images/skyBox_in/3/Back.png",
+    negativeY: `${import.meta.env.BASE_URL}images/skyBox_in/3/Front.png",
+    positiveZ: `${import.meta.env.BASE_URL}images/skyBox_in/3/Up.png",
+    negativeZ: `${import.meta.env.BASE_URL}images/skyBox_in/3/Down.png",
   },
 };
 const SKYBOX_SWITCH_HEIGHT = 10000;
@@ -1998,12 +1998,12 @@ function igniteLaunch() {
 
 function ensureEngineAudio() {
   if (engineLoopAudio) return;
-  engineLoopAudio = new Audio("./sounds/rocket-engine.mp3");
+  engineLoopAudio = new Audio(`${import.meta.env.BASE_URL}sounds/rocket-engine.mp3");
   engineLoopAudio.preload = "auto";
   engineLoopAudio.loop = false;
-  engineIgnitionAudio = new Audio("./sounds/rocket-ignition.mp3");
+  engineIgnitionAudio = new Audio(`${import.meta.env.BASE_URL}sounds/rocket-ignition.mp3");
   engineIgnitionAudio.preload = "auto";
-  explosionAudio = new Audio("./sounds/rocket-explosion.mp3");
+  explosionAudio = new Audio(`${import.meta.env.BASE_URL}sounds/rocket-explosion.mp3");
   explosionAudio.preload = "auto";
 }
 
@@ -2803,7 +2803,7 @@ function triggerCrashExplosion() {
   if (engineLoopAudio) engineLoopAudio.pause();
   engineWasOn = false;
   if (!explosionAudio) {
-    explosionAudio = new Audio("./sounds/rocket-explosion.mp3");
+    explosionAudio = new Audio(`${import.meta.env.BASE_URL}sounds/rocket-explosion.mp3");
     explosionAudio.preload = "auto";
   }
   explosionAudio.currentTime = 0;
@@ -2820,7 +2820,7 @@ function triggerCrashExplosion() {
       24,
     ),
     billboard: {
-      image: "./images/boom.png",
+      image: `${import.meta.env.BASE_URL}images/boom.png",
       width: 960,
       height: 960,
       imageSubRegion: new Cesium.BoundingRectangle(0, 1000, tileSize, tileSize),
@@ -2985,7 +2985,7 @@ function captureHighlightModelState() {
 async function initializeHighlightModel() {
   if (!viewer || rocketHighlightModel) return;
   rocketHighlightModel = await Cesium.Model.fromGltfAsync({
-    url: "./models/rocket_model.glb",
+    url: `${import.meta.env.BASE_URL}models/rocket_model.glb",
     modelMatrix: Cesium.Matrix4.IDENTITY.clone(),
     scale: 1.2,
     minimumPixelSize: 0,
@@ -3644,7 +3644,7 @@ async function initializeScene() {
   });
   createComponentPoints();
   const rocketModelPromise = Cesium.Model.fromGltfAsync({
-    url: "./models/rocket_model.glb",
+    url: `${import.meta.env.BASE_URL}models/rocket_model.glb",
     modelMatrix: Cesium.Matrix4.IDENTITY.clone(),
     scale: 1.2,
     minimumPixelSize: 48,
@@ -3711,7 +3711,7 @@ function createTrackingStations() {
       position,
       orientation,
       model: {
-        uri: "./models/leida.glb",
+        uri: `${import.meta.env.BASE_URL}models/leida.glb",
         scale: 5,
         distanceDisplayCondition: nearRange,
         heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
@@ -3792,7 +3792,7 @@ function loadLaunchStation() {
     new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(STATION_HEADING), 0, 0),
   );
   return Cesium.Model.fromGltfAsync({
-    url: "./models/lauch_station.glb",
+    url: `${import.meta.env.BASE_URL}models/lauch_station.glb",
     modelMatrix,
     scale: STATION_SCALE,
     maximumScale: STATION_SCALE,
@@ -4953,7 +4953,7 @@ button:hover {
       rgba(4, 8, 7, 0.76) 48%,
       rgba(4, 8, 7, 0.5) 100%
     ),
-    url("./images/3/tycho2t3_80_pz.jpg") center/cover no-repeat #050807;
+    url("/images/3/tycho2t3_80_pz.jpg") center/cover no-repeat #050807;
 }
 .home-topbar {
   position: absolute;
@@ -5157,7 +5157,7 @@ button:hover {
   position: absolute;
   inset: 0;
   width: 200%;
-  background-image: url("./images/earth-equirectangular.jpg");
+  background-image: url("/images/earth-equirectangular.jpg");
   background-repeat: repeat-x;
   background-size: 50% 100%;
   filter: saturate(0.72) contrast(1.08) brightness(0.68) sepia(0.08)
@@ -7202,7 +7202,7 @@ kbd {
     padding: 0 20px 72px;
     background:
       linear-gradient(0deg, rgba(4, 8, 7, 0.96), rgba(4, 8, 7, 0.48) 100%),
-      url("./images/3/tycho2t3_80_pz.jpg") center/cover no-repeat #050807;
+      url("/images/3/tycho2t3_80_pz.jpg") center/cover no-repeat #050807;
   }
   .home-topbar {
     height: 50px;

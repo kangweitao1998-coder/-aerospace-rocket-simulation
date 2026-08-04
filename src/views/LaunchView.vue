@@ -708,7 +708,7 @@ async function createRocketAssembly() {
   // ── Model �?primitive 加载 ──
   const modelReady = new Promise((resolve) => {
     Cesium.Model.fromGltfAsync({
-      url: "./models/rocket_model.glb",
+      url: `${import.meta.env.BASE_URL}models/rocket_model.glb",
       modelMatrix: Cesium.Matrix4.IDENTITY.clone(),
       scale: 1.0,
       show: true,
