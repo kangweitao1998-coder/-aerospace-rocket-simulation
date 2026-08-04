@@ -1023,7 +1023,7 @@ const DEFAULT_SCENE_SETTINGS = {
   atmosphere: true,
   depthOfField: false,
   fog: true,
-  shadows: false,
+  shadows: true,
   antialiasing: true,
   hdr: false,
   sun: true,
@@ -3405,7 +3405,7 @@ async function initializeScene() {
     selectionIndicator: false,
     terrainProvider: new Cesium.EllipsoidTerrainProvider(),
     requestRenderMode: false,
-    shadows: false,
+    shadows: true,
   });
   viewer.screenSpaceEventHandler.removeInputAction(
     Cesium.ScreenSpaceEventType.LEFT_CLICK,
