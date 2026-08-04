@@ -3404,7 +3404,6 @@ async function initializeScene() {
     infoBox: false,
     selectionIndicator: false,
     terrainProvider: new Cesium.EllipsoidTerrainProvider(),
-    imageryProvider: false,
     requestRenderMode: false,
     shadows: false,
   });
