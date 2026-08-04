@@ -249,7 +249,7 @@
         <div class="menu-status"><i></i> 场景资源已就绪</div>
       </div>
       <div class="menu-version">
-        FLIGHT BUILD 1.0 · WENCHANG · EARTH IMAGERY NASA/GSFC · © 2024-2026
+        © 2024-2026
         康伟涛 (kangweitao) · kangweitao1998@163.com · All Rights Reserved
       </div>
       <div class="menu-disclaimer">
